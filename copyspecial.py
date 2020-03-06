@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""Copyspecial Assignment"""
-
+#!/usr/bin/python
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -9,37 +6,50 @@
 # Google's Python Class
 # http://code.google.com/edu/languages/google-python-class/
 
+import sys
 import re
 import os
 import shutil
 import subprocess
-import argparse
 
-# This is to help coaches and graders identify student assignments
-__author__ = "???"
-
+"""Copy Special exercise
+"""
 
 # +++your code here+++
 # Write functions and modify main() to call them
 
+
+
 def main():
-    # This snippet will help you get started with the argparse module.
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--todir', help='dest dir for special files')
-    parser.add_argument('--tozip', help='dest zipfile for special files')
-    # TODO need an argument to pick up 'from_dir'
-    args = parser.parse_args()
+  # This basic command line argument parsing code is provided.
+  # Add code to call your functions below.
 
-    # TODO you must write your own code to get the cmdline args.
-    # Read the docs and examples for the argparse module about how to do this.
+  # Make a list of command line arguments, omitting the [0] element
+  # which is the script itself.
+  args = sys.argv[1:]
+  if not args:
+    print("usage: [--todir dir][--tozip zipfile] dir [dir ...]");
+    sys.exit(1)
 
-    # Parsing command line arguments is a must-have skill.
-    # This is input data validation.  If something is wrong (or missing) with any
-    # required args, the general rule is to print a usage message and exit(1).
+  # todir and tozip are either set from command line
+  # or left as the empty string.
+  # The args array is left just containing the dirs.
+  todir = ''
+  if args[0] == '--todir':
+    todir = args[1]
+    del args[0:2]
 
-    # +++your code here+++
-    # Call your functions
+  tozip = ''
+  if args[0] == '--tozip':
+    tozip = args[1]
+    del args[0:2]
 
+  if len(args) == 0:
+    print("error: must specify one or more dirs")
+    sys.exit(1)
 
+  # +++your code here+++
+  # Call your functions
+  
 if __name__ == "__main__":
-    main()
+  main()
